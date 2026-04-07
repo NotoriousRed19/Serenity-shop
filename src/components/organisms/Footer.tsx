@@ -1,6 +1,6 @@
 const Footer = () => (
   <footer id="contacto" className="bg-foreground text-background">
-    <div className="container py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div className="container py-16 grid grid-cols-2 md:grid-cols-4 gap-10">
       <div>
         <h3 className="font-heading text-xl tracking-[0.2em] mb-4">ESSENZA</h3>
         <p className="font-body text-sm opacity-70 leading-relaxed">

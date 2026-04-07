@@ -103,7 +103,7 @@ const ProductDetail = () => {
           Volver
         </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* Gallery */}
           <div className="space-y-4">
             <div className="aspect-square bg-secondary overflow-hidden">

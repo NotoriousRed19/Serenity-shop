@@ -30,7 +30,7 @@ const ProductCard = ({ id, name, brand, price, originalPrice, image, badge }: Pr
         {badge && <div className="absolute top-4 left-4"><Badge variant={badge}>{badge === "sale" ? "Oferta" : "Nuevo"}</Badge></div>}
         <button
           onClick={(e) => { e.preventDefault(); e.stopPropagation(); addItem({ id, name, brand, price, image }); }}
-          className="absolute bottom-4 right-4 w-12 h-12 bg-white text-gold rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 hover:bg-gold hover:text-white shadow-lg"
+          className="absolute bottom-3 right-3 md:bottom-4 md:right-4 w-10 h-10 md:w-12 md:h-12 bg-white text-gold rounded-full flex items-center justify-center shadow-lg transition-all duration-500 hover:bg-gold hover:text-white opacity-100 md:opacity-0 md:group-hover:opacity-100 md:translate-y-4 md:group-hover:translate-y-0 active:scale-90"
           aria-label={`Agregar ${name} al carrito`}
         >
           <ShoppingBag className="w-5 h-5" />

@@ -7,8 +7,8 @@ interface ProductGridProps {
 }
 
 const ProductGrid = ({ title, products = allProducts }: ProductGridProps) => (
-  <section id="catalogo" className="container py-24 animate-fade-in [animation-delay:400ms]">
-    <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+  <section id="catalogo" className="container py-12 md:py-24 animate-fade-in [animation-delay:400ms]">
+    <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-6">
       <div>
         <span className="text-[10px] uppercase tracking-[0.4em] text-gold mb-2 block font-medium">
           Selección Curada

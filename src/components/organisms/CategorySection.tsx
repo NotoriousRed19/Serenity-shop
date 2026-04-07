@@ -21,7 +21,7 @@ const CategorySection = () => (
         Encuentra la fragancia perfecta que se adapte a tu estilo y personalidad.
       </p>
     </div>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
       {categories.map((cat) => (
         <a key={cat.name} href="#" className="group relative block overflow-hidden rounded-2xl soft-shadow aspect-[3/4]">
           <img
