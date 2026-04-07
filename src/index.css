@@ -1,0 +1,90 @@
+/* Google Fonts are loaded via <link> tags in index.html for better render performance */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 96%;
+    --foreground: 30 10% 15%;
+
+    --card: 40 30% 94%;
+    --card-foreground: 30 10% 15%;
+
+    --popover: 40 33% 96%;
+    --popover-foreground: 30 10% 15%;
+
+    --primary: 36 60% 42%;
+    --primary-foreground: 40 33% 96%;
+
+    --secondary: 35 30% 88%;
+    --secondary-foreground: 30 10% 15%;
+
+    --muted: 35 20% 90%;
+    --muted-foreground: 30 8% 50%;
+
+    --accent: 36 60% 42%;
+    --accent-foreground: 40 33% 96%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 20% 85%;
+    --input: 35 20% 85%;
+    --ring: 36 60% 42%;
+
+    --radius: 0.75rem;
+
+    --announcement-bg: 30 15% 12%;
+    --announcement-fg: 40 33% 98%;
+
+    --gold: 36 45% 45%;
+    --gold-light: 40 45% 75%;
+    --cream: 40 33% 98%;
+    --cream-dark: 35 25% 92%;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    @apply tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-background/70 backdrop-blur-md border-b border-border/40;
+  }
+  .soft-shadow {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .carousel-dot {
+    @apply w-2 h-2 rounded-full bg-primary/30 transition-all duration-500 border border-white/20 hover:bg-primary/50;
+  }
+  .carousel-dot.active {
+    @apply w-8 bg-primary shadow-lg shadow-primary/20;
+  }
+}

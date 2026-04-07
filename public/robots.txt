@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://essenza.co/sitemap.xml
