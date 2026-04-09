@@ -7,8 +7,8 @@ const NotFound = () => {
   const location = useLocation();
 
   usePageMeta({
-    title: "Página no encontrada | Essenza",
-    description: "La página que buscas no existe. Vuelve al catálogo de Essenza.",
+    title: "Página no encontrada | GNperfumes",
+    description: "La página que buscas no existe. Vuelve al catálogo de GNperfumes.",
   });
 
   useEffect(() => {

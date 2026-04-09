@@ -2,7 +2,7 @@ import { X, Minus, Plus, ShoppingBag, MessageCircle } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 // ── Configura aquí tu número de WhatsApp (código de país sin el +) ──────────
-const WHATSAPP_NUMBER = "584246270071"; // ← Reemplaza con tu número real
+const WHATSAPP_NUMBER = "573236270962"; // ← Reemplaza con tu número real
 // ────────────────────────────────────────────────────────────────────────────
 
 const formatCurrency = (amount: number) =>
@@ -24,7 +24,7 @@ const buildWhatsAppMessage = (
   });
 
   const header = [
-    "*ESSENZA - PERFUMES & FRAGANCIAS*",
+    "*GNPERFUMES - PERFUMES & FRAGANCIAS*",
     `Fecha: ${date}  Hora: ${time}`,
     separator,
     "*DETALLE DE MI PEDIDO*",

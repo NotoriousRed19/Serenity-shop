@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import categoryMujer from "@/assets/category-mujer.jpg";
 import categoryHombre from "@/assets/category-hombre.jpg";
 import categoryUnisex from "@/assets/category-unisex.jpg";
 
 const categories = [
-  { name: "Mujer", image: categoryMujer, description: "Florales, orientales y frescas" },
-  { name: "Hombre", image: categoryHombre, description: "Amaderadas, cítricas y especiadas" },
-  { name: "Unisex", image: categoryUnisex, description: "Fragancias sin género" },
+  { name: "Mujer", image: categoryMujer, description: "Florales, orientales y frescas", slug: "Mujer" },
+  { name: "Hombre", image: categoryHombre, description: "Amaderadas, cítricas y especiadas", slug: "Hombre" },
+  { name: "Unisex", image: categoryUnisex, description: "Fragancias sin género", slug: "Unisex" },
 ];
 
 const CategorySection = () => (
@@ -23,7 +24,11 @@ const CategorySection = () => (
     </div>
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-8">
       {categories.map((cat) => (
-        <a key={cat.name} href="#" className="group relative block overflow-hidden rounded-2xl soft-shadow aspect-[3/4]">
+        <Link 
+          key={cat.name} 
+          to={`/catalogo?category=${cat.slug}`} 
+          className="group relative block overflow-hidden rounded-2xl soft-shadow aspect-[3/4]"
+        >
           <img
             src={cat.image}
             alt={`Perfumes para ${cat.name}`}
@@ -40,7 +45,7 @@ const CategorySection = () => (
             </p>
             <div className="mt-4 h-0.5 w-0 bg-gold group-hover:w-full transition-all duration-700" />
           </div>
-        </a>
+        </Link>
       ))}
     </div>
   </section>

@@ -8,9 +8,9 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 
 const NewArrivals = () => {
   usePageMeta({
-    title: "Novedades | Essenza — Nuevas Fragancias",
+    title: "Novedades | GNperfumes — Nuevas Fragancias",
     description:
-      "Descubre las últimas incorporaciones al catálogo de Essenza. Nuevas fragancias de lujo disponibles en Colombia.",
+      "Descubre las últimas incorporaciones al catálogo de GNperfumes. Nuevas fragancias de lujo disponibles en Colombia.",
   });
 
   const newProducts = products.filter((p) => p.badge === "new");

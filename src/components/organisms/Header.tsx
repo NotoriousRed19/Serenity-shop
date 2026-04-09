@@ -1,13 +1,24 @@
-import { Search, ShoppingBag, Menu } from "lucide-react";
+import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import Logo from "../atoms/Logo";
 import NavLinks from "../molecules/NavLinks";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { totalItems, toggleCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/catalogo?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+      setMobileOpen(false);
+    }
+  };
 
   const mobileNavItems = [
     { label: "Inicio", to: "/" },
@@ -26,16 +37,12 @@ const Header = () => {
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Menú"
           >
-            <Menu className="w-6 h-6" />
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Desktop: Left - Search/Links placeholder if needed, but let's stick to current structure */}
-        <div className="hidden md:flex items-center gap-4 flex-1">
-          <button className="text-foreground hover:text-primary transition-colors" aria-label="Buscar">
-            <Search className="w-5 h-5" />
-          </button>
-        </div>
+        {/* Desktop: Left - Empty for centring if needed, previously had search icon */}
+        <div className="hidden md:flex flex-1" />
 
         {/* Center: Logo */}
         <div className="flex justify-center">
@@ -68,9 +75,16 @@ const Header = () => {
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-background/95 backdrop-blur-lg px-6 py-8 space-y-6 animate-in slide-in-from-top duration-300">
           <div className="pb-4 border-b border-border">
-            <button className="w-full flex items-center justify-center gap-2 py-3 bg-secondary/50 rounded-xl text-sm font-body text-foreground">
-              <Search className="w-4 h-4" /> Buscar Fragancia
-            </button>
+            <form onSubmit={handleSearch} className="relative group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-gold transition-colors" />
+              <input
+                type="text"
+                placeholder="Buscar fragancia..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-secondary/30 border border-transparent rounded-xl py-3 pl-12 pr-4 text-sm font-body focus:outline-none focus:ring-1 focus:ring-gold/30 focus:bg-background transition-all"
+              />
+            </form>
           </div>
           <nav className="space-y-4">
             {mobileNavItems.map((item) => (

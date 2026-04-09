@@ -24,8 +24,8 @@ const ProductDetail = () => {
   // SEO: título dinámico por producto
   usePageMeta({
     title: product
-      ? `${product.name} — ${product.brand} | Essenza`
-      : "Producto | Essenza",
+      ? `${product.name} — ${product.brand} | GNperfumes`
+      : "Producto | GNperfumes",
     description: product
       ? `${product.name} de ${product.brand}. ${product.concentration} · ${product.volume}. ${product.description.slice(0, 120)}...`
       : undefined,
@@ -48,7 +48,7 @@ const ProductDetail = () => {
         priceCurrency: "USD",
         price: product.price.toFixed(2),
         availability: "https://schema.org/InStock",
-        seller: { "@type": "Organization", name: "Essenza" },
+        seller: { "@type": "Organization", name: "GNperfumes" },
       },
     };
 
