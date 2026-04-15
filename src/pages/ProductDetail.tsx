@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { ShoppingBag, ArrowLeft, Minus, Plus } from "lucide-react";
-import { getProductById } from "@/data/products";
+import { ShoppingBag, ArrowLeft, Minus, Plus, Loader2 } from "lucide-react";
+import { useProduct } from "@/hooks/useProducts";
 import { useCart } from "@/context/CartContext";
 import AnnouncementBar from "@/components/atoms/AnnouncementBar";
 import Header from "@/components/organisms/Header";
@@ -10,14 +10,13 @@ import CartDrawer from "@/components/organisms/CartDrawer";
 import { Button } from "@/components/ui/button";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
-const formatPrice = (amount: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
+import { formatCOP } from "@/lib/formatCurrency";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addItem } = useCart();
-  const product = getProductById(id || "");
+  const { data: product, isLoading, error } = useProduct(id);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
@@ -45,8 +44,8 @@ const ProductDetail = () => {
       sku: product.id,
       offers: {
         "@type": "Offer",
-        priceCurrency: "USD",
-        price: product.price.toFixed(2),
+        priceCurrency: "COP",
+        price: product.price.toString(),
         availability: "https://schema.org/InStock",
         seller: { "@type": "Organization", name: "GNperfumes" },
       },
@@ -64,7 +63,15 @@ const ProductDetail = () => {
     };
   }, [product]);
 
-  if (!product) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-gold" />
+      </div>
+    );
+  }
+
+  if (!product || error) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
@@ -143,11 +150,11 @@ const ProductDetail = () => {
             <div className="flex items-center gap-3">
               {product.originalPrice && (
                 <span className="text-lg font-body text-muted-foreground line-through">
-                  {formatPrice(product.originalPrice)}
+                  {formatCOP(product.originalPrice)}
                 </span>
               )}
               <span className="text-2xl font-body font-medium text-foreground">
-                {formatPrice(product.price)}
+                {formatCOP(product.price)}
               </span>
               {product.badge === "sale" && (
                 <span className="text-xs font-body bg-destructive text-destructive-foreground px-2 py-1 uppercase tracking-wider">

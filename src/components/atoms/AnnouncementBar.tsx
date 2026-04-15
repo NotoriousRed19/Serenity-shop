@@ -1,6 +1,8 @@
 const AnnouncementBar = () => (
-  <div className="bg-announcement text-announcement-foreground text-center py-2.5 text-sm font-body tracking-wide">
-    Envío gratis en compras mayores a $150 USD
+  <div className="bg-foreground text-background py-2 text-center">
+    <div className="font-body text-[9px] uppercase tracking-[0.4em] font-medium">
+      Pregunta por los precios al Mayor por whatsapp
+    </div>
   </div>
 );
 

@@ -10,6 +10,10 @@ import ProductDetail from "./pages/ProductDetail.tsx";
 import Catalog from "./pages/Catalog.tsx";
 import NewArrivals from "./pages/NewArrivals.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import AdminLogin from "./pages/admin/AdminLogin.tsx";
+import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
+import AdminProductForm from "./pages/admin/AdminProductForm.tsx";
+import AdminGuard from "./components/AdminGuard.tsx";
 
 const queryClient = new QueryClient();
 
@@ -39,10 +43,18 @@ const App = () => (
         <BrowserRouter>
           <ScrollToHash />
           <Routes>
+            {/* Public routes */}
             <Route path="/" element={<Index />} />
             <Route path="/catalogo" element={<Catalog />} />
             <Route path="/novedades" element={<NewArrivals />} />
             <Route path="/producto/:id" element={<ProductDetail />} />
+
+            {/* Admin routes */}
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminGuard><AdminDashboard /></AdminGuard>} />
+            <Route path="/admin/products/new" element={<AdminGuard><AdminProductForm /></AdminGuard>} />
+            <Route path="/admin/products/:id/edit" element={<AdminGuard><AdminProductForm /></AdminGuard>} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -1,19 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Search, X } from "lucide-react";
+import { Search, X, Loader2 } from "lucide-react";
 import AnnouncementBar from "@/components/atoms/AnnouncementBar";
 import Header from "@/components/organisms/Header";
 import ProductGrid from "@/components/organisms/ProductGrid";
 import Footer from "@/components/organisms/Footer";
 import CartDrawer from "@/components/organisms/CartDrawer";
 import { usePageMeta } from "@/hooks/usePageMeta";
-import { products } from "@/data/products";
+import { useProducts } from "@/hooks/useProducts";
 
 const Catalog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const urlQuery = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(urlQuery);
   const selectedCategory = searchParams.get("category") || "Todos";
+
+  const { data: products = [], isLoading } = useProducts();
 
   // Sincronizar estado local con la URL cuando cambia (ej. desde el buscador del movil)
   useEffect(() => {
@@ -25,13 +27,14 @@ const Catalog = () => {
     description: "Explora el catálogo completo de GNperfumes. Fragancias de lujo: Eau de Parfum, Extrait de Parfum y más.",
   });
 
-  const filteredProducts = products.filter((p) => {
-    const matchesCategory = selectedCategory === "Todos" || p.category === selectedCategory;
-    const matchesSearch = 
-      p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      p.brand.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredProducts = useMemo(() =>
+    products.filter((p) => {
+      const matchesCategory = selectedCategory === "Todos" || p.category === selectedCategory;
+      const matchesSearch = 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        p.brand.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    }), [products, selectedCategory, searchQuery]);
 
   const categories = ["Todos", "Hombre", "Mujer", "Unisex"];
 
@@ -112,9 +115,13 @@ const Catalog = () => {
             
             {/* Search Results Count */}
             <div className="mt-4 flex justify-center md:justify-start">
-              <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 font-medium">
-                Mostrando {filteredProducts.length} productos
-              </p>
+              {isLoading ? (
+                <Loader2 className="w-4 h-4 animate-spin text-muted-foreground" />
+              ) : (
+                <p className="text-[10px] uppercase tracking-widest text-muted-foreground/60 font-medium">
+                  Mostrando {filteredProducts.length} productos
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -123,6 +130,7 @@ const Catalog = () => {
           title={selectedCategory === "Todos" && !searchQuery ? "Selección Completa" : "Resultados encontrados"} 
           products={filteredProducts} 
           showViewAll={false}
+          isLoading={isLoading}
         />
       </div>
 

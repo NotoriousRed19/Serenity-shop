@@ -5,8 +5,7 @@ import { useCart } from "@/context/CartContext";
 const WHATSAPP_NUMBER = "573236270962"; // ← Reemplaza con tu número real
 // ────────────────────────────────────────────────────────────────────────────
 
-const formatCurrency = (amount: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(amount);
+import { formatCOP as formatCurrency } from "@/lib/formatCurrency";
 
 const buildWhatsAppMessage = (
   items: { name: string; brand: string; price: number; quantity: number }[],

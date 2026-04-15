@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Badge from "../atoms/Badge";
 import { useCart } from "@/context/CartContext";
 import { ShoppingBag } from "lucide-react";
+import { formatCOP } from "@/lib/formatCurrency";
 
 interface ProductCardProps {
   id: string;
@@ -42,11 +43,11 @@ const ProductCard = ({ id, name, brand, price, originalPrice, image, badge }: Pr
         <div className="flex items-center justify-center gap-3 pt-2">
           {originalPrice && (
             <span className="text-sm font-body text-muted-foreground/60 line-through decoration-gold/30">
-              ${originalPrice.toFixed(2)}
+              {formatCOP(originalPrice)}
             </span>
           )}
           <span className="text-base font-body font-semibold text-foreground tracking-tight">
-            ${price.toFixed(2)}
+            {formatCOP(price)}
           </span>
         </div>
       </div>

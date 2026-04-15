@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import categoryMujer from "@/assets/category-mujer.jpg";
-import categoryHombre from "@/assets/category-hombre.jpg";
-import categoryUnisex from "@/assets/category-unisex.jpg";
+import categoryMujer from "@/assets/category-mujer.png";
+import categoryHombre from "@/assets/category-hombre.png";
+import categoryUnisex from "@/assets/category-unisex.png";
 
 const categories = [
   { name: "Mujer", image: categoryMujer, description: "Florales, orientales y frescas", slug: "Mujer" },
