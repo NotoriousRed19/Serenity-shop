@@ -71,7 +71,7 @@ export const useCreateProduct = () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       toast.success("Producto creado exitosamente");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(`Error al crear producto: ${error.message}`);
     },
   });
@@ -113,7 +113,7 @@ export const useUpdateProduct = () => {
       queryClient.invalidateQueries({ queryKey: ["product", data.id] });
       toast.success("Producto actualizado exitosamente");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(`Error al actualizar producto: ${error.message}`);
     },
   });
@@ -132,7 +132,7 @@ export const useDeleteProduct = () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       toast.success("Producto eliminado exitosamente");
     },
-    onError: (error: any) => {
+    onError: (error: Error) => {
       toast.error(`Error al eliminar producto: ${error.message}`);
     },
   });

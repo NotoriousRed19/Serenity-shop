@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Mail, Phone, MapPin } from "lucide-react";
+
 const Footer = () => {
   const [tapCount, setTapCount] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -27,7 +29,7 @@ const Footer = () => {
         <div>
           <h3 className="font-heading text-xl tracking-[0.2em] mb-4">GNPERFUMES</h3>
           <p className="font-body text-sm opacity-70 leading-relaxed">
-            Fragancias de lujo seleccionadas para quienes buscan exclusividad y elegancia.
+            Fragancias de nicho y lujo cuidadosamente seleccionadas para quienes valoran estilos selectivos y sofisticados
           </p>
         </div>
         <div>
@@ -42,10 +44,19 @@ const Footer = () => {
         </div>
         <div>
           <h4 className="font-body text-xs uppercase tracking-widest mb-4 opacity-50">Contacto</h4>
-          <ul className="space-y-2 font-body text-sm opacity-70">
-            <li>GNperfumescol@gmail.com</li>
-            <li>+57 323 627 0962</li>
-            <li>pereira-Risaralda Colombia</li>
+          <ul className="space-y-3 font-body text-sm opacity-80">
+            <li className="flex items-center gap-3">
+              <Mail className="w-4 h-4 text-gold shrink-0" />
+              <a href="mailto:GNperfumescol@gmail.com" className="hover:text-gold transition-colors">GNperfumescol@gmail.com</a>
+            </li>
+            <li className="flex items-center gap-3">
+              <Phone className="w-4 h-4 text-gold shrink-0" />
+              <a href="tel:+573236270962" className="hover:text-gold transition-colors">+57 323 627 0962</a>
+            </li>
+            <li className="flex items-center gap-3">
+              <MapPin className="w-4 h-4 text-gold shrink-0" />
+              <span>Pereira, Risaralda - Colombia</span>
+            </li>
           </ul>
         </div>
       </div>

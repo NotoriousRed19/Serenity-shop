@@ -17,10 +17,27 @@ export interface Product {
   category: "Hombre" | "Mujer" | "Unisex";
 }
 
+export interface SupabaseProduct {
+  id: string;
+  name: string;
+  brand: string;
+  price: number | string;
+  original_price?: number | string | null;
+  images?: string[] | null;
+  badge?: string | null;
+  description: string;
+  notes_top?: string[] | null;
+  notes_heart?: string[] | null;
+  notes_base?: string[] | null;
+  concentration: string;
+  volume: string;
+  category: string;
+}
+
 /**
  * Mapea un objeto de la base de datos de Supabase al formato de la interfaz Product
  */
-export const mapSupabaseProduct = (data: any): Product => ({
+export const mapSupabaseProduct = (data: SupabaseProduct): Product => ({
   id: data.id,
   name: data.name,
   brand: data.brand,

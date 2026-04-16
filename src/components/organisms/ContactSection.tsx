@@ -1,5 +1,25 @@
-import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
+import { Mail, MapPin, Phone, MessageCircle, Instagram, Share2 } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 import contactStore from "@/assets/contact-store.png";
+
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+  </svg>
+);
 
 const ContactSection = () => {
   const contactInfo = [
@@ -51,13 +71,12 @@ const ContactSection = () => {
               </span>
               <h2 className="font-heading text-4xl md:text-5xl text-foreground !leading-tight">
                 GNperfumes: <br />
-                <span className="italic font-playfair">Exclusividad</span> en cada gota.
+                <span className="italic font-playfair">Exclusividad</span>  & Elegancia
               </h2>
               <p className="font-body text-muted-foreground leading-relaxed max-w-lg">
-                En GNperfumes, no solo vendemos fragancias; curamos experiencias olfativas que definen tu identidad. 
-                Nacimos de la pasión por la perfumería de nicho y de lujo, buscando traer a Colombia 
-                las esencias más exclusivas del mundo. Cada perfume en nuestra colección ha sido seleccionado 
-                meticulosamente para quienes no se conforman con lo ordinario.
+                En GNperfumes no solo ofrecemos fragancias; creamos experiencias olfativas que reflejan tu esencia y elevan tu identidad. Nacimos de la pasión por la perfumería de nicho y de lujo, con el propósito de traer a Colombia las fragancias más exclusivas del mundo.<br/>
+
+Cada perfume de nuestra colección ha sido cuidadosamente seleccionado para quienes buscan algo más que lo convencional, para quienes entienden que el verdadero lujo está en los detalles.
               </p>
             </div>
 
@@ -83,7 +102,7 @@ const ContactSection = () => {
               ))}
             </div>
 
-            <div className="pt-4">
+            <div className="flex flex-wrap items-center gap-4 pt-4">
               <a
                 href="https://wa.me/573236270962"
                 target="_blank"
@@ -91,8 +110,50 @@ const ContactSection = () => {
                 className="inline-flex items-center gap-3 bg-foreground text-background px-8 py-4 rounded-full text-xs uppercase tracking-widest font-medium hover:bg-gold hover:text-foreground transition-all duration-500 shadow-xl hover:shadow-gold/20 active:scale-95"
               >
                 <MessageCircle className="w-5 h-5" />
-                Contactar por WhatsApp
+                WhatsApp
               </a>
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className="h-12 w-12 rounded-full border-gold/30 hover:border-gold hover:bg-gold/5 flex items-center justify-center p-0 transition-all duration-500 group shadow-lg hover:shadow-gold/10"
+                    title="Nuestras Redes"
+                  >
+                    <Share2 className="w-5 h-5 text-gold group-hover:scale-110 transition-transform" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent 
+                  className="w-48 p-2 rounded-2xl bg-background/80 backdrop-blur-xl border-gold/10 shadow-2xl animate-fade-in"
+                  align="start"
+                  sideOffset={8}
+                >
+                  <div className="flex flex-col gap-1">
+                    <a
+                      href="https://www.instagram.com/gnperfumescol?igsh=Mmg0NXo1ODNzMzJs"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-gold/10 transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
+                        <Instagram className="w-4 h-4 text-gold" />
+                      </div>
+                      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors">Instagram</span>
+                    </a>
+                    <a
+                      href="https://www.tiktok.com/@gnperfumescol?_r=1&_t=ZS-95Yr8tZYVSG"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-xl hover:bg-gold/10 transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-secondary/50 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
+                        <TikTokIcon className="w-4 h-4 text-gold" />
+                      </div>
+                      <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors">TikTok</span>
+                    </a>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
 

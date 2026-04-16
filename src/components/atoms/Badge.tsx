@@ -5,12 +5,12 @@ interface BadgeProps {
 
 const Badge = ({ children, variant = "sale" }: BadgeProps) => {
   const styles = {
-    sale: "bg-primary text-primary-foreground",
-    new: "bg-foreground text-background",
+    sale: "bg-destructive/10 text-destructive border-destructive/20",
+    new: "bg-gold/10 text-gold border-gold/20",
   };
 
   return (
-    <span className={`absolute top-3 left-3 px-3 py-1 text-xs font-body uppercase tracking-wider ${styles[variant]}`}>
+    <span className={`px-2.5 py-1 text-[9px] font-body font-bold uppercase tracking-[0.2em] backdrop-blur-md border rounded-full ${styles[variant]} shadow-sm`}>
       {children}
     </span>
   );

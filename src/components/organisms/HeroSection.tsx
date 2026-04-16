@@ -1,14 +1,14 @@
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
-import hero1 from "@/assets/hero-1.png";
-import hero2 from "@/assets/hero-2.png";
-import hero3 from "@/assets/hero-3.png";
+import hero1 from "@/assets/hero-1.jpg";
+import hero2 from "@/assets/hero-2.jpg";
+import hero3 from "@/assets/hero-3.jpg";
 import * as React from "react";
 import { useEffect, useState } from "react";
 
 const images = [
-  { src: hero1, alt: "Esencia de Mármol" },
-  { src: hero2, alt: "Maderas y Cítricos" },
-  { src: hero3, alt: "Boutique Minimalista" }
+  { src: hero1, alt: "Valentino Donna Born In Roma Intense" },
+  { src: hero2, alt: "Jean Paul Gaultier Divine" },
+  { src: hero3, alt: "Versace Eros" }
 ];
 
 const HeroSection = () => {
@@ -76,7 +76,7 @@ const HeroSection = () => {
             Descubre tu Firma Olfativa
           </h1>
           <p className="font-body text-sm md:text-base text-muted-foreground mb-8 md:mb-10 leading-relaxed max-w-xs mx-auto">
-            Fragancias curadas artesanalmente para quienes buscan dejar una huella inolvidable.
+            Fragancias seleccionadas profesionalmente para quienes buscan dejar una huella inolvidable.
           </p>
           <a
             href="#catalogo"

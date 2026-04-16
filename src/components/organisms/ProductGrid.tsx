@@ -48,7 +48,7 @@ const ProductGrid = ({ title, products, showViewAll = true, isLoading = false }:
         <p className="font-body text-muted-foreground text-lg">No se encontraron productos.</p>
       </div>
     ) : (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-10 md:gap-y-16">
         {products.map((product) => (
           <ProductCard
             key={product.id}
@@ -59,6 +59,8 @@ const ProductGrid = ({ title, products, showViewAll = true, isLoading = false }:
             originalPrice={product.originalPrice}
             image={product.images[0]}
             badge={product.badge}
+            concentration={product.concentration}
+            volume={product.volume}
           />
         ))}
       </div>
