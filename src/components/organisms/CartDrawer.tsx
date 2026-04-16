@@ -1,7 +1,7 @@
 import { X, Minus, Plus, ShoppingBag, MessageCircle } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
-// ── Configura aquí tu número de WhatsApp (código de país sin el +) ──────────
+// ── Configura aquí tu número el WhatsApp (código de país sin el +) ──────────
 const WHATSAPP_NUMBER = "573236270962"; // ← Reemplaza con tu número real
 // ────────────────────────────────────────────────────────────────────────────
 

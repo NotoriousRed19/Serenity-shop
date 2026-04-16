@@ -5,17 +5,14 @@ interface PageMetaOptions {
   description?: string;
 }
 
-/**
- * Hook reutilizable para actualizar el <title> y la meta description
- * de forma dinámica en cada página (SPA SEO improvement).
- */
+
 export const usePageMeta = ({ title, description }: PageMetaOptions) => {
   useEffect(() => {
-    // Actualiza el título
+    
     const prevTitle = document.title;
     document.title = title;
 
-    // Actualiza la meta description si se provee
+   
     if (description) {
       let metaDesc = document.querySelector<HTMLMetaElement>('meta[name="description"]');
       if (!metaDesc) {

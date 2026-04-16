@@ -16,7 +16,7 @@ const Footer = () => {
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => setTapCount(0), 2000);
 
-    // Navigate to admin after 5 quick taps
+    
     if (newCount >= 5) {
       setTapCount(0);
       navigate("/admin");

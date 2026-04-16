@@ -34,9 +34,6 @@ export interface SupabaseProduct {
   category: string;
 }
 
-/**
- * Mapea un objeto de la base de datos de Supabase al formato de la interfaz Product
- */
 export const mapSupabaseProduct = (data: SupabaseProduct): Product => ({
   id: data.id,
   name: data.name,

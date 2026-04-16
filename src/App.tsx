@@ -5,6 +5,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthProvider";
 import Index from "./pages/Index.tsx";
 import ProductDetail from "./pages/ProductDetail.tsx";
 import Catalog from "./pages/Catalog.tsx";
@@ -36,20 +37,21 @@ const ScrollToHash = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <CartProvider>
-      <TooltipProvider>
+    <AuthProvider>
+      <CartProvider>
+        <TooltipProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
           <ScrollToHash />
           <Routes>
-            {/* Public routes */}
+           
             <Route path="/" element={<Index />} />
             <Route path="/catalogo" element={<Catalog />} />
             <Route path="/novedades" element={<NewArrivals />} />
             <Route path="/producto/:id" element={<ProductDetail />} />
 
-            {/* Admin routes */}
+           
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminGuard><AdminDashboard /></AdminGuard>} />
             <Route path="/admin/products/new" element={<AdminGuard><AdminProductForm /></AdminGuard>} />
@@ -60,6 +62,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </CartProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

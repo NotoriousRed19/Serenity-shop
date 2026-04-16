@@ -71,7 +71,7 @@ const HeroSection = () => {
           <span className="text-[10px] uppercase tracking-[0.4em] text-primary mb-3 md:mb-4 block">
             Esencia Exclusiva
           </span>
-          {/* h1 en la homepage para SEO: ajustado tamaño para móvil */}
+          {/* h1 en la homepage para SEO */}
           <h1 className="font-heading text-3xl md:text-5xl lg:text-6xl text-foreground mb-4 md:mb-6 leading-tight text-balance">
             Descubre tu Firma Olfativa
           </h1>

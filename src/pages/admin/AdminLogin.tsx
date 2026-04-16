@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Lock, Eye, EyeOff, ShieldCheck } from "lucide-react";
+import { Lock, Eye, EyeOff, ShieldCheck, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabaseClient";
 
 const AdminLogin = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,17 +16,25 @@ const AdminLogin = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simular un pequeño delay para UX
-    await new Promise((r) => setTimeout(r, 500));
+    try {
+      const emailFormatted = `${username.trim()}@gnperfumes.internal`;
+      
+      const { error } = await supabase.auth.signInWithPassword({
+        email: emailFormatted,
+        password: password,
+      });
 
-    if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
-      sessionStorage.setItem("admin_auth", "true");
-      toast.success("Acceso concedido");
-      navigate("/admin/dashboard");
-    } else {
-      toast.error("Contraseña incorrecta");
+      if (error) {
+        toast.error("Credenciales incorrectas o usuario no encontrado");
+      } else {
+        toast.success("Acceso concedido");
+        navigate("/admin/dashboard");
+      }
+    } catch (err) {
+      toast.error("Error al conectar con el servidor");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -47,42 +57,64 @@ const AdminLogin = () => {
               Panel Administrativo
             </h1>
             <p className="font-body text-sm text-muted-foreground mt-2 text-center">
-              Ingresa tu contraseña para acceder
+              Ingresa tus credenciales para acceder
             </p>
           </div>
 
-          {/* Form */}
+         
           <form onSubmit={handleLogin} className="space-y-6">
-            <div className="space-y-2">
-              <label htmlFor="admin-password" className="text-xs font-body text-muted-foreground uppercase tracking-widest">
-                Contraseña
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  id="admin-password"
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Ingresa la contraseña"
-                  className="w-full bg-background border border-border rounded-xl py-3.5 pl-12 pr-12 text-sm font-body focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all placeholder:text-muted-foreground/40"
-                  autoFocus
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                  tabIndex={-1}
-                >
-                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
+            <div className="space-y-4">
+             
+              <div className="space-y-2">
+                <label htmlFor="admin-username" className="text-xs font-body text-muted-foreground uppercase tracking-widest">
+                  Usuario
+                </label>
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    id="admin-username"
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Ingresa tu usuario"
+                    className="w-full bg-background border border-border rounded-xl py-3.5 pl-12 pr-4 text-sm font-body focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all placeholder:text-muted-foreground/40"
+                    autoFocus
+                    required
+                  />
+                </div>
+              </div>
+
+              
+              <div className="space-y-2">
+                <label htmlFor="admin-password" className="text-xs font-body text-muted-foreground uppercase tracking-widest">
+                  Contraseña
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    id="admin-password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Ingresa la contraseña"
+                    className="w-full bg-background border border-border rounded-xl py-3.5 pl-12 pr-12 text-sm font-body focus:outline-none focus:ring-2 focus:ring-gold/30 focus:border-gold/50 transition-all placeholder:text-muted-foreground/40"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
               </div>
             </div>
 
             <Button
               type="submit"
-              disabled={isLoading || !password}
+              disabled={isLoading || !password || !username}
               className="w-full h-12 text-sm font-body uppercase tracking-widest rounded-xl bg-foreground text-background hover:bg-foreground/90 transition-all"
             >
               {isLoading ? (
@@ -96,7 +128,7 @@ const AdminLogin = () => {
             </Button>
           </form>
 
-          {/* Back link */}
+          
           <div className="mt-6 text-center">
             <a
               href="/"

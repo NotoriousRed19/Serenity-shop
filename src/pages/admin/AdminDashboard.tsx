@@ -18,6 +18,7 @@ import { useProducts, useDeleteProduct } from "@/hooks/useProducts";
 import { Product } from "@/data/products";
 import { toast } from "sonner";
 import { formatCOP } from "@/lib/formatCurrency";
+import { supabase } from "@/lib/supabaseClient";
 
 const AdminDashboard = () => {
   const { data: products = [], isLoading } = useProducts();
@@ -61,10 +62,14 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("admin_auth");
-    toast.success("Sesión cerrada");
-    navigate("/admin");
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      toast.error("Error al cerrar sesión");
+    } else {
+      toast.success("Sesión cerrada");
+      navigate("/admin");
+    }
   };
 
   return (
