@@ -101,7 +101,7 @@ const AdminProductForm = () => {
 
     const productData: Product = {
       ...form,
-      id: form.id || form.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+      id: form.id || `${form.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}-${Date.now().toString(36)}`,
       notes: {
         top: parseNotes(notesInput.top),
         heart: parseNotes(notesInput.heart),

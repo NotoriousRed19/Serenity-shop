@@ -42,7 +42,7 @@ export const useCreateProduct = () => {
   return useMutation({
     mutationFn: async (product: Omit<Product, "id"> & { id?: string }) => {
       const dbProduct = {
-        id: product.id || product.name.toLowerCase().replace(/\s+/g, "-"),
+        id: product.id || `${product.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}-${Date.now().toString(36)}`,
         name: product.name,
         brand: product.brand,
         price: product.price,
